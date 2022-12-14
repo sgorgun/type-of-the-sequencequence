@@ -1,22 +1,38 @@
 ﻿namespace TypeOfDigitsSequenceConsoleClient
 {
     using System;
-    using static System.Console;
+    
     using static TypeOfDigitsSequenceLogic.IntegersExtension;
 
-    static class Program
+    internal static class Program
     {
         public static void Main()
         {
             while (true)
             {
-                WriteLine("Enter number for check, please:");
-                long number = long.Parse(ReadLine() ?? string.Empty);
-                WriteLine(GetTypeOfDigitsSequence(number));
-                WriteLine("Press Enter for a next iteration.");
-                ReadLine();
-                Clear();
+                Console.WriteLine("Enter number for check, please:");
+                var number = ParseStringToNum(Console.ReadLine());
+                Console.WriteLine(GetTypeOfDigitsSequence(number));
+                Console.WriteLine("Press Enter for a next iteration.");
+                Console.ReadLine();
+                Console.Clear();
             }
+        }
+
+        private static long ParseStringToNum(string? stringNumber)
+        {
+            long digitNumber = 0;
+            try
+            {
+                if (stringNumber != null) digitNumber = long.Parse(stringNumber);
+                return digitNumber;
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("{0} is not an digits number. Use only digit numbers, please.", stringNumber);
+            }
+
+            return 0;
         }
     }
 }
