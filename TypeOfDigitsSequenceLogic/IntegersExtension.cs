@@ -24,7 +24,7 @@ namespace TypeOfDigitsSequenceLogic
         /// -1L -> "One digit number."
         /// </returns>
         //public static bool GetTypeOfDigitsSequence(long number, out bool equals, out bool more, out bool less)
-        public static string GetTypeOfDigitsSequence(long number) =>
+        public static string GetTypeOfDigitsSequence(this long number) =>
             AnalizeNumber(number) switch
             {
                 (false, true, false, > 1) => "Strictly Increasing.",

@@ -12,7 +12,7 @@
             {
                 Console.WriteLine("Enter number for check, please:");
                 var number = ParseStringToNum(Console.ReadLine());
-                Console.WriteLine(GetTypeOfDigitsSequence(number));
+                Console.WriteLine(number.GetTypeOfDigitsSequence());
                 Console.WriteLine("Press Enter for a next iteration.");
                 Console.ReadLine();
                 Console.Clear();
@@ -31,7 +31,6 @@
             {
                 Console.WriteLine("{0} is not an digits number. Use only digit numbers, please.", stringNumber);
             }
-
             return 0;
         }
     }
