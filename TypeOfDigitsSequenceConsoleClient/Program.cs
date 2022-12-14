@@ -2,17 +2,21 @@
 {
     using System;
     using static System.Console;
-    using TypeOfDigitsSequenceLogic;
     using static TypeOfDigitsSequenceLogic.IntegersExtension;
 
-    class Program
+    static class Program
     {
-        private static void Main()
+        public static void Main()
         {
-            WriteLine();
-            ReadLine();
-
+            while (true)
+            {
+                WriteLine("Enter number for check, please:");
+                long number = long.Parse(ReadLine() ?? string.Empty);
+                WriteLine(GetTypeOfDigitsSequence(number));
+                WriteLine("Press Enter for a next iteration.");
+                ReadLine();
+                Clear();
+            }
         }
     }
-
 }
