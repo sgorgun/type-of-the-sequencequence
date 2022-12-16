@@ -27,28 +27,23 @@ namespace TypeOfDigitsSequenceLogic
         public static string GetTypeOfDigitsSequence(this long number) =>
             AnalizeNumber(number) switch
             {
-                (false, true, false, > 1) => "Strictly Increasing.",
-                (true, true, false, > 1) => "Increasing.",
-                (false, false, true, > 1) => "Strictly Decreasing.",
-                (true, false, true, > 1) => "Decreasing.",
-                (true, false, false, > 1) => "Monotonous.",
-                (false, false, false, 1) => "One digit number.",
+                (false, true, false) => "Strictly Increasing.",
+                (true, true, false) => "Increasing.",
+                (false, false, true) => "Strictly Decreasing.",
+                (true, false, true) => "Decreasing.",
+                (true, false, false) => "Monotonous.",
+                (false, false, false) => "One digit number.",
                 _ => "Unordered.",
             };
 
-        private static (bool equals, bool increase, bool decrease, long lengtsOfNuber) AnalizeNumber(long number)
+        private static (bool, bool, bool) AnalizeNumber(long number)
         {
-            long lengtsOfNuber = 1;
-            bool equals = false;
-            bool increase = false;
-            bool decrease = false;
-            (bool equals, bool more, bool less, long count) resultOfOperations = ((equals, increase, decrease, lengtsOfNuber));
+            (bool equals, bool more, bool less) resultOfOperations = (false, false, false);
 
             for (; number != 0; number /= 10)
             {
                 long termA = number % 10;
                 long termB = (number % 100 - termA) / 10;
-                lengtsOfNuber++;
 
                 if (termB == 0)
                 {
@@ -56,20 +51,19 @@ namespace TypeOfDigitsSequenceLogic
                 }
                 if (termA == termB)
                 {
-                    equals = true;
+                    resultOfOperations.equals = true;
                 }
                 if (termA > termB)
                 {
-                    increase = true;
+                    resultOfOperations.more = true;
                 }
                 if (termA < termB)
                 {
-                    decrease = true;
+                    resultOfOperations.less = true;
                 }
-                resultOfOperations = (equals, increase, decrease, lengtsOfNuber);
             }
 
-            return resultOfOperations;
+            return number is <= 9 and >= -9 ? (false, false, false) : resultOfOperations;
         }
 
     }
